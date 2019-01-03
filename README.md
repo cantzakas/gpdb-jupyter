@@ -27,8 +27,8 @@ $ python -m ensurepip --default-pip
 
 If that still doesn’t allow you to run pip:
 
-- Securely Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py)[^1].
-- Run `python get-pip.py`[^2]. This will install or upgrade *pip*. Additionally, it will install *setuptools* and *wheel* if they’re not installed already.
+- Securely Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py)<sup>[1]</sup>.
+- Run `python get-pip.py`<sup>[1]</sup>. This will install or upgrade *pip*. Additionally, it will install *setuptools* and *wheel* if they’re not installed already.
 
 | **Warning:** | 
 | :--- |
@@ -289,5 +289,6 @@ The last snippet example **GPDB-version-v3**, asks the user to input the databas
 
 ---
 
-[^1]: **"Secure"** in this context means using a modern browser or a tool like *curl* that verifies SSL certificates when downloading from https URLs.
-[^2]: Depending on your platform, this may require root or Administrator access. [pip](https://packaging.python.org/key_projects/#pip) is currently considering changing this by [making user installs the default behavior](https://github.com/pypa/pip/issues/1668).
+[1]: **Secure** in this context means using a modern browser or a tool like *curl* that verifies SSL certificates when downloading from https URLs.
+
+[2]: Depending on your platform, this may require root or Administrator access. [pip](https://packaging.python.org/key_projects/#pip) is currently considering changing this by [making user installs the default behavior](https://github.com/pypa/pip/issues/1668).
