@@ -28,7 +28,7 @@ $ python -m ensurepip --default-pip
 If that still doesn’t allow you to run pip:
 
 - Securely Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py)<sup>[1]</sup>.
-- Run `python get-pip.py`<sup>[1]</sup>. This will install or upgrade *pip*. Additionally, it will install *setuptools* and *wheel* if they’re not installed already.
+- Run `python get-pip.py`<sup>[2]</sup>. This will install or upgrade *pip*. Additionally, it will install *setuptools* and *wheel* if they’re not installed already.
 
 | **Warning:** | 
 | :--- |
