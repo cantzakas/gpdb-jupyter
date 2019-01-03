@@ -1,0 +1,8 @@
+{
+  "database": "gpadmin",
+  "schema": "public",
+  "user": "gpadmin",
+  "host": "127.0.0.1",
+  "port": "5432",
+  "passw": "pivotal"
+}
