@@ -211,6 +211,12 @@ $ pip install jupyter_contrib_nbextensions && jupyter contrib nbextension instal
 
 ![img](jupyter-snippets-menu-gpdb-3.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
+- Run the cells to execute the code inserted:
+
+![img](jupyter-snippets-menu-gpdb-4.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
+
+----------------
+
 [1]: **Secure** in this context means using a modern browser or a tool like *curl* that verifies SSL certificates when downloading from https URLs.
 
 [2]: Depending on your platform, this may require root or Administrator access. [pip](https://packaging.python.org/key_projects/#pip) is currently considering changing this by [making user installs the default behavior](https://github.com/pypa/pip/issues/1668).
