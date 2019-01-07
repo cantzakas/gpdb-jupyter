@@ -174,7 +174,7 @@ $ pip install jupyter_contrib_nbextensions && jupyter contrib nbextension instal
 
 ![img](jupyter-snippets-menu.png "Jupyter Notebook Snippets Menu Extension")
 
-- Enable/Activate the *Include custome menu content parsed from JSON string below* option, and update the JSON text within the text area with the following:
+- Enable/Activate the *Include custom menu content parsed from JSON string below* option, and update the JSON text within the text area with the [following](snippets-menu-gpdb-custom.json):
 
 ```json
 {
