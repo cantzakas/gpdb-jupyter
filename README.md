@@ -44,10 +44,10 @@ $ python -m pip install --upgrade pip setuptools wheel
 
 ## Ensure ipython-sql & psycopg2 are up to date
 
-You must also install the Python SQL packages with the *pip* tool. You may achieve that by executing the following in the command-line:
+You must also install the Python SQL toolkit, PostgreSQL adapter for the Python and [***sql_magic***](https://github.com/pivotal-legacy/sql_magic) Python library for writing SQL to interact with relational databases, with the *pip* tool. You may achieve that by executing the following in the command-line:
 
 ```shell
-$ pip install --upgrade ipython-sql psycopg2-binary
+$ pip install --upgrade ipython-sql psycopg2-binary sqlalchemy sql_magic
 ```
 
 ## Install Jupyter Notebooks with pip
@@ -160,134 +160,56 @@ Run the following in a command prompt:
 $ pip install jupyter_contrib_nbextensions && jupyter contrib nbextension install 
 ```
 
-## Enable *Snippets* Jupyter Notebook Extension
+## Enable *Snippets Menu* Jupyter Notebook Extension
 
-- Start up a Jupyter Notebook 
+- Start up a Jupyter Notebook:
 
 ![img](jupyter-files.png "Jupyter Notebook")
 
-- Navigate to the new Nbextensions tab
+- Navigate to the new Nbextensions tab:
 
 ![img](jupyter-nbextensions.png "Jupyter Notebook Extensions")
 
-- Enable Jupyter Notebook *Snippets* Extension. 
+- Enable Jupyter Notebook *Snippets Menu* Extension:
 
-![img](jupyter-snippets.png "Jupyter Notebook Snippet Extension")
+![img](jupyter-snippets-menu.png "Jupyter Notebook Snippets Menu Extension")
 
-- This extension adds a drop-down menu to the IPython toolbar that allows easy insertion of code snippet cells into the current notebook. 
-
-![img](snippets-demo.gif "Jupyter Notebook Snippet Extension Demo")
-
-## Add a Greenplum Database snippet
-Snippets are specified by adding a new JSON block to the list of existing snippets specidifed in the `/usr/local/share/jupyter/nbextensions/snippets/snippets.json` file. For example, to add a new snippet that connects to a Greenplum database and prints its version, the JSON file should be modified from:
+- Enable/Activate the *Include custome menu content parsed from JSON string below* option, and update the JSON text within the text area with the following:
 
 ```json
 {
-    "snippets" : [
+    "name" : "Greenplum Database",
+    "sub-menu" : [
         {
-            "name" : "example",
-            "code" : [
-                "# This is an example snippet!",
-                "# To create your own, add a new snippet block to the",
-                "# snippets.json file in your jupyter data directory under nbextensions:",
-                "# $(jupyter --data-dir)/nbextensions/snippets/snippets.json",
-                "import this"
-            ]
+            "name" : "Connect to Greenplum Database (manual)",
+            "snippet" : ["%load_ext sql", 
+                "%sql postgres://gpadmin:pivotal@10.0.2.6:5432/gpadmin"]
+        },
+        {
+            "name" : "Connect to Greenplum Database (via config file)",
+            "snippet" : ["import json",
+                "with open('/root/gpdb-config.json') as f:\n dbconf = json.load(f)",
+                "%load_ext sql", 
+                "%sql postgresql://{dbconf['user']}:{dbconf['passw']}@{dbconf['host']}:{str(dbconf['port'])}/{dbconf['database']}"]
+        },
+        "---",
+        {
+            "name" : "Get Greenplum Database Version",
+            "snippet" : ["%%sql\nSELECT version()"]
         }
     ]
 }
 ```
 
-to this:
+![img](jupyter-snippets-menu-gpdb.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
-```json
-{
-    "snippets" : [
-        {
-            "name" : "GPDB-version",
-            "code" : [
-                "%load_ext sql",
-                "%sql postgres://gpadmin:pivotal@localhost:5432/gpadmin",
-                "version = %sql SELECT version()",
-                "version"
-            ]
-        }
-    ]
-}
-```
+- Create a new Python Notebook. Notice the **Snippets** menu which has now been added into your toolbar. Click to expand the menu and notice the *Greenplum Database* sub-menu and the *Connect to Greenplum Database (manual)*, *Connect to Greenplum Database (via config file)*, and *Get Greenplum Database Version* options which have been added, according to the JSON string above.
 
-You may need to restart your notebook for the changes to take effect.
+![img](jupyter-snippets-menu-gpdb-2.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
-**GPDB-version** snippet in now available on the **Snippets Extension** drop-down list:
+- Click i.e. on the *Connect to Greenplum Database (manual)* option; the snippet code defined in the JSON string, is now added into the active cell:
 
-![img](snippets-gpdb.png "Jupyter Notebook Snippet Extension")
-
-## Greenplum Database snippet v2: *User credentials and database info via config file*
-
-Snippets are very useful for combining tasks and steps which are usually executed together. This next example **GPDB-version-v2**, uses a JSON file to read the database credentials and connection information, connects to the Greenplum Database and finally prints the version:
-
-```json
-{
-	"snippets": [
-		{
-			"name": "GPDB-version",
-			"code": [
-				... (see example v1 above)
-			]
-		},
-		{
-			"name": "GPDB-version-v2",
-			"code": [
-				"import json",
-				"with open('gpdb-config.json') as f:\n dbconf = json.load(f)",
-				"%load_ext sql",
-				"conn_string = \"postgres://{username}:{password}@{hostname}:{portnum}/{databasename}\".format(\n username=dbconf['user'], \n password=dbconf['passw'], \n hostname=dbconf['host'], \n portnum=dbconf['port'], \n databasename=dbconf['database'])",
-				"%sql $conn_string",
-				"version = %sql SELECT version()",
-				"version"
-			]
-		}
-	]
-}
-```
-
-The new, **GPDB-version-v2** snippet in now available on the **Snippets Extension** drop-down list:
-
-![img](snippets-gpdb-2.png "Jupyter Notebook Snippet Extension")
-
-## Greenplum Database snippet v3: *User credentials and database info via user input*
-
-The last snippet example **GPDB-version-v3**, asks the user to input the database credentials and connection information before connecting to the Greenplum Database and finally printing the database version:
-
-```json
-{
-	"snippets": [
-		{
-			"name": "GPDB-version",
-			"code": [
-				... (see example v1 above)
-			]
-		},
-		{
-			"name": "GPDB-version-v2",
-			"code": [
-				... (see example v2 above)
-			]
-		},
-		{
-			"name": "GPDB-version-v2",
-			"code": [
-				... (see example v2 above)
-			]
-		}
-	]
-}
-```
-
-![img](snippets-gpdb-3.png "Jupyter Notebook Snippet Extension")
-
-
----
+![img](jupyter-snippets-menu-gpdb-3.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
 [1]: **Secure** in this context means using a modern browser or a tool like *curl* that verifies SSL certificates when downloading from https URLs.
 
