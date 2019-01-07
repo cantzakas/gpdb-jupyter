@@ -1,0 +1,37 @@
+{
+    "name" : "Greenplum Database",
+    "sub-menu" : [
+        {
+            "name" : "GPDB-version-v1",
+            "snippet" : ["%load_ext sql",
+                "%sql postgres://gpadmin:pivotal@10.0.2.6:5432/gpadmin",
+                "version = %sql SELECT version()",
+                "version"]
+        },
+        {
+            "name" : "GPDB-version-v2",
+            "snippet" : ["import json",
+				"with open('gpdb-config.json') as f:\n dbconf = json.load(f)",
+				"%load_ext sql",
+				"conn_string = \"postgres://{username}:{password}@{hostname}:{portnum}/{databasename}\".format(\n username=dbconf['user'], \n password=dbconf['passw'], \n hostname=dbconf['host'], \n portnum=dbconf['port'], \n databasename=dbconf['database'])",
+				"%sql $conn_string",
+				"version = %sql SELECT version()",
+				"version"]
+        },
+        {
+            "name" : "GPDB-version-v3",
+            "snippet" : ["import getpass",
+				"hostname=raw_input('Hostname:')",
+				"portnum=raw_input('Post number:')",
+				"databasename=raw_input('Database name:')",
+				"username=raw_input('Username:')",
+				"password=getpass.getpass('Password:')",
+				"%load_ext sql",
+				"conn_string = \"postgres://{username}:{password}@{hostname}:{portnum}/{databasename}\".format(\n username=username, \n password=password, \n hostname=hostname, \n portnum=portnum, \n databasename=databasename)",
+				"%sql $conn_string",
+				"version = %sql SELECT version()",
+				"version"]
+        }
+    ]
+}
+
