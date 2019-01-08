@@ -122,7 +122,7 @@ $ jupyter notebook --generate-config
 ```
 
 ### Automatic Password setup
-As of notebook 5.3, the first time you log-in using a token, the notebook server should give you the opportunity to setup a password from the user interface. You will be presented with a form asking for the current *token*, as well as your *new password*; enter both and click on __Login and setup new password**. Next time you need to log in you’ll be able to use the new password instead of the login token, otherwise follow the procedure to set a password from the command line.
+As of notebook 5.3, the first time you log-in using a token, the notebook server should give you the opportunity to setup a password from the user interface. You will be presented with a form asking for the current *token*, as well as your *new password*; enter both and click on ***Login and setup new password***. Next time you need to log in you’ll be able to use the new password instead of the login token, otherwise follow the procedure to set a password from the command line.
 
 Starting at notebook version 5.0, you can enter and store a password for your notebook server with a single command. jupyter notebook password will prompt you for your password and record the hashed password in your `jupyter_notebook_config.json`.
 
@@ -164,15 +164,15 @@ $ pip install jupyter_contrib_nbextensions && jupyter contrib nbextension instal
 
 - Start up a Jupyter Notebook:
 
-![img](jupyter-files.png "Jupyter Notebook")
+![img](images/jupyter-files.png "Jupyter Notebook")
 
 - Navigate to the new Nbextensions tab:
 
-![img](jupyter-nbextensions.png "Jupyter Notebook Extensions")
+![img](images/jupyter-nbextensions.png "Jupyter Notebook Extensions")
 
 - Enable Jupyter Notebook *Snippets Menu* Extension:
 
-![img](jupyter-snippets-menu.png "Jupyter Notebook Snippets Menu Extension")
+![img](images/jupyter-snippets-menu.png "Jupyter Notebook Snippets Menu Extension")
 
 - Enable/Activate the *Include custom menu content parsed from JSON string below* option, and update the JSON text within the text area with the [following](snippets-menu-gpdb-custom.json):
 
@@ -201,19 +201,19 @@ $ pip install jupyter_contrib_nbextensions && jupyter contrib nbextension instal
 }
 ```
 
-![img](jupyter-snippets-menu-gpdb.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
+![img](images/jupyter-snippets-menu-gpdb.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
 - Create a new Python Notebook. Notice the **Snippets** menu which has now been added into your toolbar. Click to expand the menu and notice the *Greenplum Database* sub-menu and the *Connect to Greenplum Database (manual)*, *Connect to Greenplum Database (via config file)*, and *Get Greenplum Database Version* options which have been added, according to the JSON string above.
 
-![img](jupyter-snippets-menu-gpdb-2.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
+![img](images/jupyter-snippets-menu-gpdb-2.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
-- Click i.e. on the *Connect to Greenplum Database (manual)* option; the snippet code defined in the JSON string, is now added into the active cell:
+- Click on the *Connect to Greenplum Database (manual)* option; the snippet code defined in the JSON string, is now added into the active cell:
 
-![img](jupyter-snippets-menu-gpdb-3.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
+![img](images/jupyter-snippets-menu-gpdb-3.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
 - Run the cells to execute the code inserted:
 
-![img](jupyter-snippets-menu-gpdb-4.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
+![img](images/jupyter-snippets-menu-gpdb-4.png "Jupyter Notebook Snippets Menu Extension, Greenplum Database")
 
 ----------------
 
